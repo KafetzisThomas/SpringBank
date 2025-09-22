@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS bankingsystem;
+USE bankingsystem;
+
+DROP TABLE IF EXISTS transactions;
+
+CREATE TABLE transactions (
+    id INT NOT NULL AUTO_INCREMENT,
+    amount DECIMAL(19,2) NOT NULL,
+    transaction_type VARCHAR(20) NOT NULL,
+    timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
