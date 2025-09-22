@@ -5,6 +5,7 @@ import com.kafetzisthomas.banking.bankingsystem.entity.Transaction;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class TransactionServiceImpl implements TransactionService{
@@ -13,6 +14,11 @@ public class TransactionServiceImpl implements TransactionService{
 
     public TransactionServiceImpl(TransactionRepository transactionRepository) {
         this.transactionRepository = transactionRepository;
+    }
+
+    @Override
+    public List<Transaction> getAllTransactions() {
+        return transactionRepository.findAll();
     }
 
     @Override
