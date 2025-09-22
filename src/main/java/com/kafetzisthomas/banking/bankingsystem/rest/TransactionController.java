@@ -25,7 +25,7 @@ public class TransactionController {
 
     @PostMapping("/transactions")
     public Transaction addTransaction(@RequestBody Transaction transaction) {
-        transaction.setId(0);
+        transaction.setId(0L);
         return transactionService.createTransaction(transaction);
     }
 }
