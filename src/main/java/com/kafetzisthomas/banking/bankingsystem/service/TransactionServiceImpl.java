@@ -41,4 +41,9 @@ public class TransactionServiceImpl implements TransactionService{
         existing.setType(updatedTransaction.getType());
         return transactionRepository.save(existing);
     }
+
+    @Override
+    public void deleteTransaction(Long id) {
+        transactionRepository.deleteById(id);
+    }
 }

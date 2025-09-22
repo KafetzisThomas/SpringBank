@@ -14,4 +14,6 @@ public interface TransactionService {
 
     Transaction updateTransaction(Long id, Transaction updatedTransaction);
 
+    void deleteTransaction(Long id);
+
 }
