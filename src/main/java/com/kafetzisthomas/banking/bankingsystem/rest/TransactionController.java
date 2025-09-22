@@ -2,10 +2,7 @@ package com.kafetzisthomas.banking.bankingsystem.rest;
 
 import com.kafetzisthomas.banking.bankingsystem.entity.Transaction;
 import com.kafetzisthomas.banking.bankingsystem.service.TransactionService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,9 +20,18 @@ public class TransactionController {
         return transactionService.getAllTransactions();
     }
 
+    @GetMapping("/transactions/{id}")
+    public Transaction getTransactionById(@PathVariable Long id) {
+        return transactionService.getTransactionById(id);
+    }
+
     @PostMapping("/transactions")
     public Transaction addTransaction(@RequestBody Transaction transaction) {
-        transaction.setId(0L);
         return transactionService.createTransaction(transaction);
+    }
+
+    @PutMapping("/transactions/{id}")
+    public Transaction updateTransaction(@PathVariable Long id, @RequestBody Transaction updatedTransaction) {
+        return transactionService.updateTransaction(id, updatedTransaction);
     }
 }

@@ -8,6 +8,10 @@ public interface TransactionService {
 
     List<Transaction> getAllTransactions();
 
+    Transaction getTransactionById(Long id);
+
     Transaction createTransaction(Transaction transaction);
+
+    Transaction updateTransaction(Long id, Transaction updatedTransaction);
 
 }

@@ -22,8 +22,23 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
+    public Transaction getTransactionById(Long id) {
+        return transactionRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public Transaction createTransaction(Transaction transaction) {
         transaction.setTimestamp(LocalDateTime.now());
         return transactionRepository.save(transaction);
+    }
+
+    @Override
+    public Transaction updateTransaction(Long id, Transaction updatedTransaction) {
+        Transaction existing = transactionRepository.findById(id).orElse(null);
+        if (existing == null) return null;
+
+        existing.setAmount(updatedTransaction.getAmount());
+        existing.setType(updatedTransaction.getType());
+        return transactionRepository.save(existing);
     }
 }
