@@ -25,19 +25,31 @@ public class Transaction {
     @Column
     private LocalDateTime timestamp;
 
+    @Column(nullable = false)
+    private String ownerUsername;
+
     // define constructors
 
     public Transaction() {
 
     }
 
-    public Transaction(BigDecimal amount, String type, LocalDateTime timestamp) {
+    public Transaction(BigDecimal amount, String type, LocalDateTime timestamp, String ownerUsername) {
         this.amount = amount;
         this.type = type;
         this.timestamp = timestamp;
+        this.ownerUsername = ownerUsername;
     }
 
     // define getters/setters
+
+    public String getOwnerUsername() {
+        return ownerUsername;
+    }
+
+    public void setOwnerUsername(String ownerUsername) {
+        this.ownerUsername = ownerUsername;
+    }
 
     public LocalDateTime getTimestamp() {
         return timestamp;
@@ -80,6 +92,8 @@ public class Transaction {
                 ", amount=" + amount +
                 ", type='" + type + '\'' +
                 ", timestamp=" + timestamp +
+                ", ownerUsername='" + ownerUsername + '\'' +
                 '}';
     }
+
 }
