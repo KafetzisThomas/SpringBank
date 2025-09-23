@@ -11,51 +11,8 @@
     <title>Transaction Report</title>
 </head>
 <body>
-    <!-- navbar start -->
-    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
-        <div class="container">
-            <a class="navbar-brand" th:href="@{/transactions}">Banking System</a>
+    <div th:replace="base :: navbar"></div>
 
-            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-lg-0">
-
-                    <li class="nav-item">
-                        <a class="nav-link [[${#httpServletRequest.requestURI == '/'} ? 'active' : '']]"
-                           th:href="@{/}">Transaction Report</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link [[${#httpServletRequest.requestURI == '/addTransaction'} ? 'active' : '']]"
-                           th:href="@{/addTransaction}">Deposit</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link [[${#httpServletRequest.requestURI == '/withdraw'} ? 'active' : '']]"
-                           href="#">Withdraw</a>
-                    </li>
-
-                </ul>
-                <ul class="navbar-nav ms-auto mb-lg-0">
-
-                    <li class="nav-item">
-                        <form action="#" method="POST" class="d-inline">
-                            <button type="submit" class="nav-link btn btn-link">Logout</button>
-                        </form>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- navbar end -->
-
-    <!-- content start -->
     <div class="container mt-5">
         <h3 class="mt-5 text-center">Transaction Report</h3>
         <hr class="border-dark">
@@ -77,18 +34,8 @@
             </tbody>
         </table>
     </div>
-    <!-- content end -->
 
-    <!-- footer start -->
-    <footer class="footer bg-light text-dark py-3 fixed-bottom">
-        <div class="container">
-            <hr class="border-dark mb-1">
-            <div class="row text-center mt-3">
-                <p>&copy; 2025 KafetzisThomas</p>
-            </div>
-        </div>
-    </footer>
-    <!-- footer end -->
+    <div th:replace="base :: footer"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
