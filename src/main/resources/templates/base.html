@@ -28,7 +28,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link [[${#httpServletRequest.requestURI == '/withdraw'} ? 'active' : '']]"
-                               href="#">Withdraw</a>
+                               th:href="@{/withdraw}">Withdraw</a>
                         </li>
 
                     </ul>
