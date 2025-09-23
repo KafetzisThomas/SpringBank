@@ -8,8 +8,6 @@ public interface TransactionService {
 
     List<Transaction> getAllTransactions();
 
-    Transaction getTransactionById(Long id);
-
     void deposit(Transaction transaction);
 
     void withdraw(Transaction transaction);

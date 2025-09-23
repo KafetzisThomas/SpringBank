@@ -27,11 +27,6 @@ public class TransactionController {
         return "transaction-report";
     }
 
-    @GetMapping("/transactions/{id}")
-    public Transaction getTransactionById(@PathVariable Long id) {
-        return transactionService.getTransactionById(id);
-    }
-
     @GetMapping("/deposit")
     public String showDepositForm(Model model) {
         model.addAttribute("transaction", new Transaction());

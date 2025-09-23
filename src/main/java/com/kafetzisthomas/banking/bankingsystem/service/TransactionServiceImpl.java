@@ -22,11 +22,6 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
-    public Transaction getTransactionById(Long id) {
-        return transactionRepository.findById(id).orElse(null);
-    }
-
-    @Override
     public void deposit(Transaction transaction) {
         transaction.setType("Deposit");
         transaction.setTimestamp(LocalDateTime.now());
