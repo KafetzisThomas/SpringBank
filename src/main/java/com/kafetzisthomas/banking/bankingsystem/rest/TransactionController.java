@@ -4,7 +4,10 @@ import com.kafetzisthomas.banking.bankingsystem.entity.Transaction;
 import com.kafetzisthomas.banking.bankingsystem.service.TransactionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -53,13 +56,4 @@ public class TransactionController {
         return "redirect:/";
     }
 
-    @PutMapping("/transactions/{id}")
-    public Transaction updateTransaction(@PathVariable Long id, @RequestBody Transaction updatedTransaction) {
-        return transactionService.updateTransaction(id, updatedTransaction);
-    }
-
-    @DeleteMapping("/transactions/{id}")
-    public void deleteTransaction(@PathVariable Long id) {
-        transactionService.deleteTransaction(id);
-    }
 }

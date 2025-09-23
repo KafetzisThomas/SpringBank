@@ -40,18 +40,4 @@ public class TransactionServiceImpl implements TransactionService{
         transactionRepository.save(transaction);
     }
 
-    @Override
-    public Transaction updateTransaction(Long id, Transaction updatedTransaction) {
-        Transaction existing = transactionRepository.findById(id).orElse(null);
-        if (existing == null) return null;
-
-        existing.setAmount(updatedTransaction.getAmount());
-        existing.setType(updatedTransaction.getType());
-        return transactionRepository.save(existing);
-    }
-
-    @Override
-    public void deleteTransaction(Long id) {
-        transactionRepository.deleteById(id);
-    }
 }

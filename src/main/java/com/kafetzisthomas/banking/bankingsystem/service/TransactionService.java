@@ -14,8 +14,4 @@ public interface TransactionService {
 
     void withdraw(Transaction transaction);
 
-    Transaction updateTransaction(Long id, Transaction updatedTransaction);
-
-    void deleteTransaction(Long id);
-
 }
