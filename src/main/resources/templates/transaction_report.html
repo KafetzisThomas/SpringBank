@@ -58,25 +58,22 @@
     <!-- content start -->
     <div class="container mt-5">
         <h3 class="mt-5 text-center">Transaction Report</h3>
-
-        <hr>
-
+        <hr class="border-dark">
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
-            <tr>
-                <th>TRANSACTION TYPE</th>
-                <th>DATE</th>
-                <th>AMOUNT</th>
-            </tr>
+                <tr>
+                    <th>TRANSACTION TYPE</th>
+                    <th>DATE</th>
+                    <th>AMOUNT</th>
+                </tr>
             </thead>
 
             <tbody>
-            <tr th:each="transaction : ${transactions}">
-                <td th:text="${transaction.type}" />
-                <td th:text="${transaction.timestamp}" />
-                <td th:text="'€ ' + ${transaction.amount}" />
-
-            </tr>
+                <tr th:each="transaction : ${transactions}">
+                    <td th:text="${transaction.type}" />
+                    <td th:text="${#temporals.format(transaction.timestamp, 'MMM. d, yyyy, h:mm a')}" />
+                    <td th:text="'€ ' + ${transaction.amount}" />
+                </tr>
             </tbody>
         </table>
     </div>
