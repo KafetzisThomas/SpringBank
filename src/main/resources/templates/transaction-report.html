@@ -26,17 +26,17 @@
                 <ul class="navbar-nav me-auto mb-lg-0">
 
                     <li class="nav-item">
-                        <a class="nav-link [[${#httpServletRequest.requestURI == '/transactions'} ? 'active' : '']]"
-                           th:href="@{/transactions}">Transaction Report</a>
+                        <a class="nav-link [[${#httpServletRequest.requestURI == '/'} ? 'active' : '']]"
+                           th:href="@{/}">Transaction Report</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link [[${#httpServletRequest.requestURI == '/deposit/'} ? 'active' : '']]"
-                           href="#">Deposit</a>
+                        <a class="nav-link [[${#httpServletRequest.requestURI == '/addTransaction'} ? 'active' : '']]"
+                           th:href="@{/addTransaction}">Deposit</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link [[${#httpServletRequest.requestURI == '/withdraw/'} ? 'active' : '']]"
+                        <a class="nav-link [[${#httpServletRequest.requestURI == '/withdraw'} ? 'active' : '']]"
                            href="#">Withdraw</a>
                     </li>
 

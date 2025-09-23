@@ -17,11 +17,11 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @GetMapping("/transactions")
+    @GetMapping("/")
     public String listTransactions(Model theModel) {
         List<Transaction> transactions = transactionService.getAllTransactions();
         theModel.addAttribute("transactions", transactions);
-        return "transaction_report";
+        return "transaction-report";
     }
 
     @GetMapping("/transactions/{id}")
@@ -29,9 +29,23 @@ public class TransactionController {
         return transactionService.getTransactionById(id);
     }
 
-    @PostMapping("/transactions")
-    public Transaction addTransaction(@RequestBody Transaction transaction) {
-        return transactionService.createTransaction(transaction);
+    @GetMapping("/addTransaction")
+    public String showFormForAdd(Model theModel) {
+
+        // create a model attribute to bind form data
+        Transaction theTransaction = new Transaction();
+
+        theModel.addAttribute("transaction", theTransaction);
+
+        return "deposit-form";
+    }
+
+    @PostMapping("/save")
+    public String saveTransaction(@ModelAttribute("transaction") Transaction theTransaction) {
+        transactionService.createTransaction(theTransaction);
+
+        // use a redirect to prevent duplicate submissions
+        return "redirect:/";
     }
 
     @PutMapping("/transactions/{id}")

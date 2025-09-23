@@ -27,9 +27,9 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
-    public Transaction createTransaction(Transaction transaction) {
+    public void createTransaction(Transaction transaction) {
         transaction.setTimestamp(LocalDateTime.now());
-        return transactionRepository.save(transaction);
+        transactionRepository.save(transaction);
     }
 
     @Override
