@@ -2,11 +2,13 @@ package com.kafetzisthomas.banking.bankingsystem.rest;
 
 import com.kafetzisthomas.banking.bankingsystem.entity.Transaction;
 import com.kafetzisthomas.banking.bankingsystem.service.TransactionService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class TransactionController {
 
     private final TransactionService transactionService;
@@ -16,8 +18,10 @@ public class TransactionController {
     }
 
     @GetMapping("/transactions")
-    public List<Transaction> listTransactions() {
-        return transactionService.getAllTransactions();
+    public String listTransactions(Model theModel) {
+        List<Transaction> transactions = transactionService.getAllTransactions();
+        theModel.addAttribute("transactions", transactions);
+        return "transaction_report";
     }
 
     @GetMapping("/transactions/{id}")
