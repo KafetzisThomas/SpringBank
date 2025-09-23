@@ -22,6 +22,7 @@ public class Transaction {
     @Column
     private String type;  // deposit or withdraw
 
+    @Column
     private LocalDateTime timestamp;
 
     // define constructors

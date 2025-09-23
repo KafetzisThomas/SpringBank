@@ -17,14 +17,13 @@
         <h4>Enter Deposit Details</h4>
         <hr class="border-dark">
 
-        <form th:action="@{/save}" th:object="${transaction}" method="POST">
+        <form th:action="@{/deposit/save}" th:object="${transaction}" method="POST">
 
             <!-- Add a hidden form field to handle update -->
             <input type="hidden" th:field="*{id}" />
 
             <label>
                 <input type="text" th:field="*{amount}" class="form-control mb-4" placeholder="Amount">
-                <input type="text" th:field="*{type}" class="form-control mb-4" placeholder="Transaction Type">
                 <button type="submit" class="btn btn-info w-100">Save</button>
             </label>
 

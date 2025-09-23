@@ -29,22 +29,27 @@ public class TransactionController {
         return transactionService.getTransactionById(id);
     }
 
-    @GetMapping("/addTransaction")
-    public String showFormForAdd(Model theModel) {
-
-        // create a model attribute to bind form data
-        Transaction theTransaction = new Transaction();
-
-        theModel.addAttribute("transaction", theTransaction);
-
+    @GetMapping("/deposit")
+    public String showDepositForm(Model model) {
+        model.addAttribute("transaction", new Transaction());
         return "deposit-form";
     }
 
-    @PostMapping("/save")
-    public String saveTransaction(@ModelAttribute("transaction") Transaction theTransaction) {
-        transactionService.createTransaction(theTransaction);
+    @GetMapping("/withdraw")
+    public String showWithdrawForm(Model model) {
+        model.addAttribute("transaction", new Transaction());
+        return "withdraw-form";
+    }
 
-        // use a redirect to prevent duplicate submissions
+    @PostMapping("/deposit/save")
+    public String saveDeposit(@ModelAttribute("transaction") Transaction theTransaction) {
+        transactionService.deposit(theTransaction);
+        return "redirect:/";
+    }
+
+    @PostMapping("/withdraw/save")
+    public String saveWithdraw(@ModelAttribute("transaction") Transaction theTransaction) {
+        transactionService.withdraw(theTransaction);
         return "redirect:/";
     }
 
