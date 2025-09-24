@@ -2,6 +2,7 @@ package com.kafetzisthomas.banking.bankingsystem.rest;
 
 import com.kafetzisthomas.banking.bankingsystem.entity.Transaction;
 import com.kafetzisthomas.banking.bankingsystem.service.TransactionService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,25 +22,27 @@ public class TransactionController {
     }
 
     @GetMapping("/")
-    public String listTransactions(Model theModel, Principal principal) {
+    public String listTransactions(HttpServletRequest request, Model theModel, Principal principal) {
 
         // get the transactions from db only for the current user
         List<Transaction> transactions = transactionService.getAllTransactions(principal.getName());
 
         theModel.addAttribute("transactions", transactions);
-
+        theModel.addAttribute("request", request);
         return "transactions/transaction-report";
     }
 
     @GetMapping("/deposit")
-    public String showDepositForm(Model model) {
-        model.addAttribute("transaction", new Transaction());
+    public String showDepositForm(HttpServletRequest request, Model theModel) {
+        theModel.addAttribute("transaction", new Transaction());
+        theModel.addAttribute("request", request);
         return "transactions/deposit-form";
     }
 
     @GetMapping("/withdraw")
-    public String showWithdrawForm(Model model) {
-        model.addAttribute("transaction", new Transaction());
+    public String showWithdrawForm(HttpServletRequest request, Model theModel) {
+        theModel.addAttribute("transaction", new Transaction());
+        theModel.addAttribute("request", request);
         return "transactions/withdraw-form";
     }
 
