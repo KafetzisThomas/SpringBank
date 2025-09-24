@@ -17,21 +17,21 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
-    public List<Transaction> getAllTransactions(String username) {
-        return transactionRepository.findAllByOwnerUsername(username);
+    public List<Transaction> getAllTransactions(String email) {
+        return transactionRepository.findAllByOwnerEmail(email);
     }
 
     @Override
-    public void deposit(Transaction transaction, String username) {
-        transaction.setOwnerUsername(username);
+    public void deposit(Transaction transaction, String email) {
+        transaction.setOwnerEmail(email);
         transaction.setType("Deposit");
         transaction.setTimestamp(LocalDateTime.now());
         transactionRepository.save(transaction);
     }
 
     @Override
-    public void withdraw(Transaction transaction, String username) {
-        transaction.setOwnerUsername(username);
+    public void withdraw(Transaction transaction, String email) {
+        transaction.setOwnerEmail(email);
         transaction.setType("Withdraw");
         transaction.setTimestamp(LocalDateTime.now());
         transactionRepository.save(transaction);

@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface TransactionService {
 
-    // return transactions only for the specified username
-    List<Transaction> getAllTransactions(String username);
+    // return transactions only for the specified email
+    List<Transaction> getAllTransactions(String email);
 
-    // create a new deposit transaction for the specified username
-    void deposit(Transaction transaction, String username);
+    // create a new deposit transaction for the specified email
+    void deposit(Transaction transaction, String email);
 
-    // create a new withdraw transaction for the specified username
-    void withdraw(Transaction transaction, String username);
+    // create a new withdraw transaction for the specified email
+    void withdraw(Transaction transaction, String email);
 
 }

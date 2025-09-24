@@ -34,9 +34,9 @@ public class RegistrationController {
                              Model model, RedirectAttributes redirectAttributes) {
 
         // basic checks without heavy validation
-        if (form.getUsername() == null || form.getUsername().isBlank()
+        if (form.getEmail() == null || form.getEmail().isBlank()
                 || form.getPassword() == null || form.getPassword().isBlank()) {
-            model.addAttribute("error", "Username and password are required.");
+            model.addAttribute("error", "Email and password are required.");
             return "users/register";
         }
 
@@ -45,12 +45,12 @@ public class RegistrationController {
             return "users/register";
         }
 
-        if (userDetailsManager.userExists(form.getUsername())) {
+        if (userDetailsManager.userExists(form.getEmail())) {
             model.addAttribute("error", "User already exists.");
             return "users/register";
         }
 
-        UserDetails user = User.withUsername(form.getUsername())
+        UserDetails user = User.withUsername(form.getEmail())
                 .passwordEncoder(passwordEncoder::encode)
                 .password(form.getPassword())
                 .roles("USER")

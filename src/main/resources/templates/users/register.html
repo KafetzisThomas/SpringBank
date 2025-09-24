@@ -21,13 +21,13 @@
                 <div th:if="${error}" class="text-danger mb-2" th:text="${error}"></div>
 
                 <div class="mb-3">
-                    <label for="UsernameInput" class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control" id="UsernameInput">
+                    <label for="EmailInput" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" id="EmailInput" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="PasswordInput" class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" id="PasswordInput">
+                    <input type="password" name="password" class="form-control" id="PasswordInput" required>
                 </div>
 
                 <div class="mb-3">

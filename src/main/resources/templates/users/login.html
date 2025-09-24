@@ -25,7 +25,7 @@
 
                 <!-- Check for login error -->
                 <div th:if="${param.error}" class="mb-2">
-                    <i class="text-danger">Sorry! You entered invalid username/password.</i>
+                    <i class="text-danger">Sorry! You entered invalid email/password.</i>
                 </div>
 
                 <!-- Logout message -->
@@ -34,13 +34,13 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="UsernameInput" class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control" id="UsernameInput">
+                    <label for="EmailInput" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" id="EmailInput" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="PasswordInput" class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" id="PasswordInput">
+                    <input type="password" name="password" class="form-control" id="PasswordInput" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Login</button>

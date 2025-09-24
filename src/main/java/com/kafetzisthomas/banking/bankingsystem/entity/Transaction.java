@@ -26,7 +26,7 @@ public class Transaction {
     private LocalDateTime timestamp;
 
     @Column(nullable = false)
-    private String ownerUsername;
+    private String ownerEmail;
 
     // define constructors
 
@@ -34,21 +34,21 @@ public class Transaction {
 
     }
 
-    public Transaction(BigDecimal amount, String type, LocalDateTime timestamp, String ownerUsername) {
+    public Transaction(BigDecimal amount, String type, LocalDateTime timestamp, String ownerEmail) {
         this.amount = amount;
         this.type = type;
         this.timestamp = timestamp;
-        this.ownerUsername = ownerUsername;
+        this.ownerEmail = ownerEmail;
     }
 
     // define getters/setters
 
-    public String getOwnerUsername() {
-        return ownerUsername;
+    public String getOwnerEmail() {
+        return ownerEmail;
     }
 
-    public void setOwnerUsername(String ownerUsername) {
-        this.ownerUsername = ownerUsername;
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
     }
 
     public LocalDateTime getTimestamp() {
@@ -92,7 +92,7 @@ public class Transaction {
                 ", amount=" + amount +
                 ", type='" + type + '\'' +
                 ", timestamp=" + timestamp +
-                ", ownerUsername='" + ownerUsername + '\'' +
+                ", ownerEmail='" + ownerEmail + '\'' +
                 '}';
     }
 

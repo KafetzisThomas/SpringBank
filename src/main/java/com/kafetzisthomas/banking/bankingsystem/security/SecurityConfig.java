@@ -18,7 +18,20 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource);
+        JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
+        manager.setUsersByUsernameQuery("select email as username, password, enabled from users where email = ?");
+        manager.setAuthoritiesByUsernameQuery("select email as username, authority from authorities where email = ?");
+
+        // Custom SQL queries for managing users by email with JDBC
+        manager.setUserExistsSql("select 1 from users where email = ?");
+        manager.setCreateUserSql("insert into users (email, password, enabled) values (?,?,?)");
+        manager.setUpdateUserSql("update users set password = ?, enabled = ? where email = ?");
+        manager.setChangePasswordSql("update users set password = ? where email = ?");
+        manager.setCreateAuthoritySql("insert into authorities (email, authority) values (?,?)");
+        manager.setDeleteUserAuthoritiesSql("delete from authorities where email = ?");
+        manager.setDeleteUserSql("delete from users where email = ?");
+
+        return manager;
     }
 
     @Bean
@@ -38,6 +51,7 @@ public class SecurityConfig {
                         form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/authenticateTheUser")
+                                .usernameParameter("email")  // use email as principal parameter
                                 .defaultSuccessUrl("/", true)
                                 .permitAll()
                 )
