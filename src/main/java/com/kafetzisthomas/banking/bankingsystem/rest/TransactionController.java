@@ -3,8 +3,10 @@ package com.kafetzisthomas.banking.bankingsystem.rest;
 import com.kafetzisthomas.banking.bankingsystem.entity.Transaction;
 import com.kafetzisthomas.banking.bankingsystem.service.TransactionService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,13 +49,25 @@ public class TransactionController {
     }
 
     @PostMapping("/deposit/save")
-    public String saveDeposit(@ModelAttribute("transaction") Transaction theTransaction, Principal principal) {
+    public String saveDeposit(@ModelAttribute("transaction") Transaction theTransaction,
+                              @Valid BindingResult theBindingResult, Principal principal) {
+
+        if (theBindingResult.hasErrors()) {
+            return "transactions/deposit-form";
+        }
+
         transactionService.deposit(theTransaction, principal.getName());
         return "redirect:/";
     }
 
     @PostMapping("/withdraw/save")
-    public String saveWithdraw(@ModelAttribute("transaction") Transaction theTransaction, Principal principal) {
+    public String saveWithdraw(@ModelAttribute("transaction") Transaction theTransaction,
+                               @Valid BindingResult theBindingResult, Principal principal) {
+
+        if (theBindingResult.hasErrors()) {
+            return "transactions/withdraw-form";
+        }
+
         transactionService.withdraw(theTransaction, principal.getName());
         return "redirect:/";
     }

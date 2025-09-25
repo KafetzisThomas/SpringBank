@@ -1,6 +1,8 @@
 package com.kafetzisthomas.banking.bankingsystem.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,16 +18,21 @@ public class Transaction {
     @Column(name="id")
     private Long id;
 
-    @Column
+    @Column(nullable = false)
+    @NotNull(message="is required")
+    @DecimalMin(value="0.01", message="must be greater than zero")
     private BigDecimal amount;
 
-    @Column
+    @Column(nullable = false)
+    @NotNull(message="is required")
     private String type;  // deposit or withdraw
 
-    @Column
+    @Column(nullable = false)
+    @NotNull(message="is required")
     private LocalDateTime timestamp;
 
     @Column(nullable = false)
+    @NotNull(message="is required")
     private String ownerEmail;
 
     // define constructors

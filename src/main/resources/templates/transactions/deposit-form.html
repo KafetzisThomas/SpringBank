@@ -18,11 +18,18 @@
         <hr class="border-dark">
 
         <form th:action="@{/deposit/save}" th:object="${transaction}" method="POST">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-            <label>
-                <input type="text" th:field="*{amount}" class="form-control mb-4" placeholder="Amount">
-                <button type="submit" class="btn btn-info w-100">Apply</button>
-            </label>
+            <div class="mb-3">
+                <label for="amount">Amount</label>
+                <input type="number" th:field="*{amount}" class="form-control"
+                       id="amount" min="0.01" step="0.01" required />
+
+                <!-- Error message -->
+                <div class="text-danger mt-1" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
+            </div>
+
+            <button type="submit" class="btn btn-info w-100">Apply</button>
 
         </form>
     </div>
