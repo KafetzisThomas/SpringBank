@@ -51,8 +51,8 @@
     <!-- navbar end -->
 
     <!-- footer start -->
-    <div th:fragment="footer">
-        <footer class="footer text-dark py-3 ">
+    <div th:fragment="footer(extraClass)">
+        <footer class="footer text-dark py-3" th:classappend="${extraClass}">
             <div class="container">
                 <hr class="border-dark mb-1">
                 <div class="row text-center mt-3">

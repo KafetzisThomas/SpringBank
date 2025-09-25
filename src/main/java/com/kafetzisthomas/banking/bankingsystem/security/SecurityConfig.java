@@ -42,27 +42,23 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeHttpRequests(configurer ->
-                        configurer
-                                .requestMatchers("/register", "/register/**").permitAll()
-                                .anyRequest().authenticated()
+        http.authorizeHttpRequests(configurer -> configurer
+                        .requestMatchers("/register", "/register/**").permitAll()
+                        .requestMatchers("/actuator/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
-                .formLogin(form ->
-                        form
-                                .loginPage("/login")
-                                .loginProcessingUrl("/authenticateTheUser")
-                                .usernameParameter("email")  // use email as principal parameter
-                                .defaultSuccessUrl("/", true)
-                                .permitAll()
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/authenticateTheUser")
+                        .usernameParameter("email")  // use email as principal parameter
+                        .defaultSuccessUrl("/", true)
+                        .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll
+                .logout(LogoutConfigurer::permitAll)
+                .exceptionHandling(configurer -> configurer
+                        .accessDeniedPage("/showAccessDenied")
                 )
-                .exceptionHandling(configurer ->
-                        configurer.accessDeniedPage("/showAccessDenied")
-                );
-
-        // use HTTP Basic authentication
-        http.httpBasic(Customizer.withDefaults());
+                .httpBasic(Customizer.withDefaults());  // use HTTP Basic authentication
 
         return http.build();
     }
