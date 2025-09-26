@@ -38,7 +38,7 @@ class TransactionControllerTest {
     }
 
     @Test
-    void listTransactions() throws Exception {
+    void whenListTransactions_thenShowTransactionReport() throws Exception {
         Transaction transaction = new Transaction();
         transaction.setBalance(new BigDecimal("100.00"));
         when(transactionService.getAllTransactions("test@example.com"))
@@ -51,7 +51,7 @@ class TransactionControllerTest {
     }
 
     @Test
-    void saveDepositSuccessful() throws Exception {
+    void whenDepositSuccessful_thenRedirectWithSuccessMessage() throws Exception {
         Transaction deposit = new Transaction();
         deposit.setAmount(new BigDecimal("200.00"));
 
@@ -64,7 +64,7 @@ class TransactionControllerTest {
     }
 
     @Test
-    void saveWithdrawInsufficientFunds() throws Exception {
+    void whenWithdrawInsufficientFunds_thenRedirectWithErrorMessage() throws Exception {
         Transaction withdrawal = new Transaction();
         withdrawal.setAmount(new BigDecimal("500.00"));
 
