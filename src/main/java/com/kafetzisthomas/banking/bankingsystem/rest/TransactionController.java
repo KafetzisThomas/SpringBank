@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
@@ -31,6 +32,10 @@ public class TransactionController {
 
         theModel.addAttribute("transactions", transactions);
         theModel.addAttribute("request", request);
+
+        BigDecimal currentBalance = transactions.getLast().getBalance();
+        theModel.addAttribute("currentBalance", currentBalance);
+
         return "transactions/transaction-report";
     }
 

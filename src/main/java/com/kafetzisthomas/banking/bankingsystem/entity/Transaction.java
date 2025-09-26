@@ -25,7 +25,7 @@ public class Transaction {
 
     @Column(nullable = false)
     @NotNull(message="is required")
-    @DecimalMin(value="0.01", message="must be greater than zero")
+    @DecimalMin(value="0.00", message="must be equal or greater than zero")
     private BigDecimal balance;
 
     @Column(nullable = false)
