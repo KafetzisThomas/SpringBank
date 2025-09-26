@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
 import java.security.Principal;
@@ -55,25 +56,43 @@ public class TransactionController {
 
     @PostMapping("/deposit/save")
     public String saveDeposit(@ModelAttribute("transaction") Transaction theTransaction,
-                              @Valid BindingResult theBindingResult, Principal principal) {
+                              @Valid BindingResult theBindingResult, Principal principal,
+                              RedirectAttributes redirectAttributes) {
 
         if (theBindingResult.hasErrors()) {
             return "transactions/deposit-form";
         }
+        try {
+            transactionService.deposit(theTransaction, principal.getName());
+            String formattedAmount = theTransaction.getAmount() + " €";
+            redirectAttributes.addFlashAttribute(
+                    "successMessage",
+                    "Deposit successful: " + formattedAmount + " added to your account");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Deposit failed: " + e.getMessage());
+        }
 
-        transactionService.deposit(theTransaction, principal.getName());
         return "redirect:/";
     }
 
     @PostMapping("/withdraw/save")
     public String saveWithdraw(@ModelAttribute("transaction") Transaction theTransaction,
-                               @Valid BindingResult theBindingResult, Principal principal) {
+                               @Valid BindingResult theBindingResult, Principal principal,
+                               RedirectAttributes redirectAttributes) {
 
         if (theBindingResult.hasErrors()) {
             return "transactions/withdraw-form";
         }
+        try {
+            transactionService.withdraw(theTransaction, principal.getName());
+            String formattedAmount = theTransaction.getAmount() + " €";
+            redirectAttributes.addFlashAttribute(
+                    "successMessage",
+                    "Withdraw successful: " + formattedAmount + " removed from your account");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Withdraw failed: " + e.getMessage());
+        }
 
-        transactionService.withdraw(theTransaction, principal.getName());
         return "redirect:/";
     }
 
