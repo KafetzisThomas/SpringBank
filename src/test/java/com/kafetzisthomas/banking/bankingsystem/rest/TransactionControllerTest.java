@@ -34,14 +34,14 @@ class TransactionControllerTest {
 
     @BeforeEach
     void setUp() {
-        mockPrincipal = () -> "user@example.com";
+        mockPrincipal = () -> "test@example.com";
     }
 
     @Test
     void listTransactions() throws Exception {
         Transaction transaction = new Transaction();
         transaction.setBalance(new BigDecimal("100.00"));
-        when(transactionService.getAllTransactions("user@example.com"))
+        when(transactionService.getAllTransactions("test@example.com"))
                 .thenReturn(List.of(transaction));
 
         mockMvc.perform(get("/").principal(mockPrincipal))
@@ -69,7 +69,7 @@ class TransactionControllerTest {
         withdrawal.setAmount(new BigDecimal("500.00"));
 
         Mockito.doThrow(new IllegalArgumentException("Insufficient funds"))
-                .when(transactionService).withdraw(withdrawal, "user@example.com");
+                .when(transactionService).withdraw(withdrawal, "test@example.com");
 
         mockMvc.perform(post("/withdraw/save")
                         .flashAttr("transaction", withdrawal)
