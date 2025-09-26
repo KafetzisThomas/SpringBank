@@ -25,6 +25,11 @@ public class Transaction {
 
     @Column(nullable = false)
     @NotNull(message="is required")
+    @DecimalMin(value="0.01", message="must be greater than zero")
+    private BigDecimal balance;
+
+    @Column(nullable = false)
+    @NotNull(message="is required")
     private String type;  // deposit or withdraw
 
     @Column(nullable = false)
@@ -41,8 +46,9 @@ public class Transaction {
 
     }
 
-    public Transaction(BigDecimal amount, String type, LocalDateTime timestamp, String ownerEmail) {
+    public Transaction(BigDecimal amount, BigDecimal balance, String type, LocalDateTime timestamp, String ownerEmail) {
         this.amount = amount;
+        this.balance = balance;
         this.type = type;
         this.timestamp = timestamp;
         this.ownerEmail = ownerEmail;
@@ -74,6 +80,14 @@ public class Transaction {
         this.type = type;
     }
 
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
     public BigDecimal getAmount() {
         return amount;
     }
@@ -97,6 +111,7 @@ public class Transaction {
         return "Transaction{" +
                 "id=" + id +
                 ", amount=" + amount +
+                ", balance=" + balance +
                 ", type='" + type + '\'' +
                 ", timestamp=" + timestamp +
                 ", ownerEmail='" + ownerEmail + '\'' +

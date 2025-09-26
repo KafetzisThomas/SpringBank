@@ -18,18 +18,20 @@
         <hr class="border-dark">
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
-                <tr>
+                <tr class="text-center">
                     <th>TRANSACTION TYPE</th>
                     <th>DATE</th>
                     <th>AMOUNT</th>
+                    <th>BALANCE AFTER TRANSACTION</th>
                 </tr>
             </thead>
 
             <tbody>
                 <tr th:each="transaction : ${transactions}">
-                    <td th:text="${transaction.type}" />
-                    <td th:text="${#temporals.format(transaction.timestamp, 'MMM. d, yyyy, h:mm a')}" />
-                    <td th:text="'€ ' + ${transaction.amount}" />
+                    <td class="text-center" th:text="${transaction.type}" />
+                    <td class="text-center" th:text="${#temporals.format(transaction.timestamp, 'MMM. d, yyyy, h:mm a')}" />
+                    <td class="text-center" th:text="'€ ' + ${transaction.amount}" />
+                    <td class="text-center" th:text="'€ ' + ${transaction.balance}" />
                 </tr>
             </tbody>
         </table>
