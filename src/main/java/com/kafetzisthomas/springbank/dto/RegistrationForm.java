@@ -1,4 +1,4 @@
-package com.kafetzisthomas.banking.bankingsystem.dto;
+package com.kafetzisthomas.springbank.dto;
 
 public class RegistrationForm {
     private String email;

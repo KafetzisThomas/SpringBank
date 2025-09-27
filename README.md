@@ -18,8 +18,8 @@ Built with Java 25, Spring Boot, MySQL, Thymeleaf and Bootstrap 5.
 ### Clone the repository
 
 ```bash
-git clone https://github.com/KafetzisThomas/banking-system.git
-cd banking-system
+git clone https://github.com/KafetzisThomas/SpringBank.git
+cd SpringBank
 ```
 
 ### Rename and configure the application properties file

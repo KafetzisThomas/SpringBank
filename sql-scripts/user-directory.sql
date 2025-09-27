@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS bankingsystem;
-USE bankingsystem;
+CREATE DATABASE IF NOT EXISTS springbank;
+USE springbank;
 
 DROP TABLE IF EXISTS users;
 

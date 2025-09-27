@@ -1,7 +1,7 @@
-package com.kafetzisthomas.banking.bankingsystem.service;
+package com.kafetzisthomas.springbank.service;
 
-import com.kafetzisthomas.banking.bankingsystem.dao.TransactionRepository;
-import com.kafetzisthomas.banking.bankingsystem.entity.Transaction;
+import com.kafetzisthomas.springbank.dao.TransactionRepository;
+import com.kafetzisthomas.springbank.entity.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

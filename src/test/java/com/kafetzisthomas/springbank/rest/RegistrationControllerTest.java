@@ -1,4 +1,4 @@
-package com.kafetzisthomas.banking.bankingsystem.rest;
+package com.kafetzisthomas.springbank.rest;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

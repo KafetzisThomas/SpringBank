@@ -1,6 +1,6 @@
-package com.kafetzisthomas.banking.bankingsystem.dao;
+package com.kafetzisthomas.springbank.dao;
 
-import com.kafetzisthomas.banking.bankingsystem.entity.Transaction;
+import com.kafetzisthomas.springbank.entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;

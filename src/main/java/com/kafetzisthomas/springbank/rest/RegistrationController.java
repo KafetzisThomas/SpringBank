@@ -1,6 +1,6 @@
-package com.kafetzisthomas.banking.bankingsystem.rest;
+package com.kafetzisthomas.springbank.rest;
 
-import com.kafetzisthomas.banking.bankingsystem.dto.RegistrationForm;
+import com.kafetzisthomas.springbank.dto.RegistrationForm;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;

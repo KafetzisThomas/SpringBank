@@ -1,4 +1,4 @@
-package com.kafetzisthomas.banking.bankingsystem.security;
+package com.kafetzisthomas.springbank.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

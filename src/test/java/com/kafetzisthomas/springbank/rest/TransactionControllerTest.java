@@ -1,7 +1,7 @@
-package com.kafetzisthomas.banking.bankingsystem.rest;
+package com.kafetzisthomas.springbank.rest;
 
-import com.kafetzisthomas.banking.bankingsystem.entity.Transaction;
-import com.kafetzisthomas.banking.bankingsystem.service.TransactionService;
+import com.kafetzisthomas.springbank.entity.Transaction;
+import com.kafetzisthomas.springbank.service.TransactionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

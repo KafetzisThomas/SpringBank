@@ -1,7 +1,7 @@
-package com.kafetzisthomas.banking.bankingsystem.rest;
+package com.kafetzisthomas.springbank.rest;
 
-import com.kafetzisthomas.banking.bankingsystem.entity.Transaction;
-import com.kafetzisthomas.banking.bankingsystem.service.TransactionService;
+import com.kafetzisthomas.springbank.entity.Transaction;
+import com.kafetzisthomas.springbank.service.TransactionService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -32,6 +32,7 @@ public class TransactionController {
                                    HttpServletRequest request, Model theModel, Principal principal) {
 
         List<Transaction> transactions;
+        BigDecimal currentBalance = BigDecimal.ZERO;
 
         if (daterange != null && daterange.contains(" - ")) {
             String[] parts = daterange.split(" - ");
@@ -56,7 +57,7 @@ public class TransactionController {
         theModel.addAttribute("request", request);
         theModel.addAttribute("daterange", daterange);
 
-        BigDecimal currentBalance = transactions.getLast().getBalance();
+        currentBalance = transactions.getLast().getBalance();
         theModel.addAttribute("currentBalance", currentBalance);
 
         return "transactions/transaction-report";

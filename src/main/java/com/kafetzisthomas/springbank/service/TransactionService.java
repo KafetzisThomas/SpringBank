@@ -1,6 +1,6 @@
-package com.kafetzisthomas.banking.bankingsystem.service;
+package com.kafetzisthomas.springbank.service;
 
-import com.kafetzisthomas.banking.bankingsystem.entity.Transaction;
+import com.kafetzisthomas.springbank.entity.Transaction;
 
 import java.time.LocalDateTime;
 import java.util.List;
