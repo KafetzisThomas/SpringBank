@@ -34,18 +34,19 @@ public class TransactionController {
         List<Transaction> transactions;
 
         if (daterange != null && daterange.contains(" - ")) {
-            try {
-                String[] parts = daterange.split(" - ");
-                LocalDate startDate = LocalDate.parse(parts[0].trim());
-                LocalDate endDate = LocalDate.parse(parts[1].trim());
+            String[] parts = daterange.split(" - ");
+            LocalDate startDate = LocalDate.parse(parts[0].trim());
+            LocalDate endDate = LocalDate.parse(parts[1].trim());
 
-                transactions = transactionService.getTransactionsByDateRange(
-                        principal.getName(), startDate.atStartOfDay(), endDate.atTime(23, 59, 59)
-                );
-            } catch (Exception e) {
-                theModel.addAttribute("errorMessage", "Invalid date range format");
+            transactions = transactionService.getTransactionsByDateRange(
+                    principal.getName(), startDate.atStartOfDay(), endDate.atTime(23, 59, 59)
+            );
+
+            if (transactions.isEmpty()) {
+                theModel.addAttribute("errorMessage", "No transactions found for selected date range");
                 transactions = transactionService.getAllTransactions(principal.getName());
             }
+
         } else {
             // get the transactions from db only for the current user
             transactions = transactionService.getAllTransactions(principal.getName());
