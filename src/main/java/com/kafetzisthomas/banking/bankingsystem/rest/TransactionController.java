@@ -10,10 +10,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -26,13 +28,32 @@ public class TransactionController {
     }
 
     @GetMapping("/")
-    public String listTransactions(HttpServletRequest request, Model theModel, Principal principal) {
+    public String listTransactions(@RequestParam(value = "daterange", required = false) String daterange,
+                                   HttpServletRequest request, Model theModel, Principal principal) {
 
-        // get the transactions from db only for the current user
-        List<Transaction> transactions = transactionService.getAllTransactions(principal.getName());
+        List<Transaction> transactions;
+
+        if (daterange != null && daterange.contains(" - ")) {
+            try {
+                String[] parts = daterange.split(" - ");
+                LocalDate startDate = LocalDate.parse(parts[0].trim());
+                LocalDate endDate = LocalDate.parse(parts[1].trim());
+
+                transactions = transactionService.getTransactionsByDateRange(
+                        principal.getName(), startDate.atStartOfDay(), endDate.atTime(23, 59, 59)
+                );
+            } catch (Exception e) {
+                theModel.addAttribute("errorMessage", "Invalid date range format");
+                transactions = transactionService.getAllTransactions(principal.getName());
+            }
+        } else {
+            // get the transactions from db only for the current user
+            transactions = transactionService.getAllTransactions(principal.getName());
+        }
 
         theModel.addAttribute("transactions", transactions);
         theModel.addAttribute("request", request);
+        theModel.addAttribute("daterange", daterange);
 
         BigDecimal currentBalance = transactions.getLast().getBalance();
         theModel.addAttribute("currentBalance", currentBalance);

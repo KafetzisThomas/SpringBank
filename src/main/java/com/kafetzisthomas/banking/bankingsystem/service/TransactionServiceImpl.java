@@ -22,6 +22,11 @@ public class TransactionServiceImpl implements TransactionService{
         return transactionRepository.findAllByOwnerEmail(email);
     }
 
+    @Override
+    public List<Transaction> getTransactionsByDateRange(String email, LocalDateTime start, LocalDateTime end) {
+        return transactionRepository.findAllByOwnerEmailAndTimestampBetween(email, start, end);
+    }
+
     private BigDecimal getCurrentBalance(String email) {
         return transactionRepository.findTopByOwnerEmailOrderByTimestampDesc(email)
                 .map(Transaction::getBalance)
