@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="src/main/resources/static/favicon.ico" width="100" alt="Logo Icon"/>
+    <img src="src/main/resources/static/favicon.ico" width="150" alt="Logo Icon"/>
     <p>A simple banking system concept.<br>Written in Java/Spring Boot</p>
 </div>
 
