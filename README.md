@@ -13,6 +13,10 @@
 
 Built with Java 25, Spring Boot, MySQL, Thymeleaf and Bootstrap 5.
 
+## Database Schema
+
+![Database Schema](src/main/resources/static/images/springbank_db_schema.png)
+
 ## Setup for Local Development
 
 ### Clone the repository
