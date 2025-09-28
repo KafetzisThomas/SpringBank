@@ -53,3 +53,11 @@ mvn test
 ```
 
 Note: Most of these steps can be skipped if you use a full-featured IDE like IntelliJ.
+
+## Demo Images
+
+![Deposit Transaction](src/main/resources/static/images/deposit_transaction.png)
+
+![Withdraw Transaction](src/main/resources/static/images/withdraw_transaction.png)
+
+![Date Range Filter](src/main/resources/static/images/date_range_filter.png)
