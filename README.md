@@ -22,6 +22,14 @@ git clone https://github.com/KafetzisThomas/SpringBank.git
 cd SpringBank
 ```
 
+### Run the SQL scripts to create tables
+
+In MySQL Workbench, open and run the scripts from the `sql-scripts/` directory (user table first, then transaction table).
+https://youtu.be/6Td5dbUC4Wg?si=FUFFYj-s0ak8XaQf
+
+If you prefer the CLI, you can use the following commands:
+https://youtu.be/gvcBDA2wJJ4?si=o6WndNPOMsMe8G7S
+
 ### Rename and configure the application properties file
 
 ```bash
