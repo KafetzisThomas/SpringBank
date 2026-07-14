@@ -15,7 +15,7 @@ Built with Java 25, Spring Boot, MySQL, Thymeleaf and Bootstrap 5.
 
 ## Database Schema
 
-![Database Schema](src/main/resources/static/images/springbank_db_schema.png)
+![Database Schema](assets/springbank_db_schema.png)
 
 ## Setup for Local Development
 
@@ -60,8 +60,8 @@ Note: Most of these steps can be skipped if you use a full-featured IDE like Int
 
 ## Demo Images
 
-![Deposit Transaction](src/main/resources/static/images/deposit_transaction.png)
+![Deposit Transaction](assets/deposit_transaction.png)
 
-![Withdraw Transaction](src/main/resources/static/images/withdraw_transaction.png)
+![Withdraw Transaction](assets/withdraw_transaction.png)
 
-![Date Range Filter](src/main/resources/static/images/date_range_filter.png)
+![Date Range Filter](assets/date_range_filter.png)
