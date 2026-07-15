@@ -5,9 +5,9 @@
 
 ## Features
 
-- Deposit and withdraw money
-- View transaction history with an optional date range filter
-- See real-time balance updates after each transaction
+- Make deposits and withdrawals
+- View transaction history with date filtering
+- Monitor your balance in real time after each transaction
 
 ## Tech Stack
 
@@ -15,7 +15,7 @@ Built with Java 25, Spring Boot, MySQL, Thymeleaf and Bootstrap 5.
 
 ## Database Schema
 
-![Database Schema](assets/springbank_db_schema.png)
+![Database Schema](assets/db_schema.png)
 
 ## Usage
 
@@ -45,8 +45,8 @@ Access web application at http://127.0.0.1:8080 or http://localhost:8080.
 
 ## Demo Images
 
-![Deposit Transaction](assets/deposit_transaction.png)
+![Deposit](assets/deposit.png)
 
-![Withdraw Transaction](assets/withdraw_transaction.png)
+![Withdraw](assets/withdraw.png)
 
-![Date Range Filter](assets/date_range_filter.png)
+![Date Range](assets/date_range.png)
