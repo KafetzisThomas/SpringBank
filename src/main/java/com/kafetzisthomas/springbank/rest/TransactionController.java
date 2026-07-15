@@ -54,7 +54,12 @@ public class TransactionController {
         theModel.addAttribute("request", request);
         theModel.addAttribute("daterange", daterange);
 
-        currentBalance = transactions.getLast().getBalance();
+        if (!transactions.isEmpty()) {
+            currentBalance = transactions.getLast().getBalance();
+        } else {
+            currentBalance = BigDecimal.ZERO;
+        }
+
         theModel.addAttribute("currentBalance", currentBalance);
 
         return "transactions/transaction-report";

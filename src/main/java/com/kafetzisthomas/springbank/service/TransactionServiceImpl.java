@@ -4,6 +4,7 @@ import com.kafetzisthomas.springbank.entity.Transaction;
 import com.kafetzisthomas.springbank.repository.TransactionRepository;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -35,6 +36,7 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
+    @Transactional
     public void deposit(Transaction transaction, String email) {
         transaction.setOwnerEmail(email);
         transaction.setType("Deposit");
@@ -48,6 +50,7 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
+    @Transactional
     public void withdraw(Transaction transaction, String email) {
         transaction.setOwnerEmail(email);
         transaction.setType("Withdraw");
