@@ -30,12 +30,8 @@ public class RegistrationController {
     }
 
     @PostMapping("/register")
-    public String doRegister(@ModelAttribute("form") RegistrationForm form,
-                             Model model, RedirectAttributes redirectAttributes) {
-
-        // basic checks without heavy validation
-        if (form.getEmail() == null || form.getEmail().isBlank()
-                || form.getPassword() == null || form.getPassword().isBlank()) {
+    public String doRegister(@ModelAttribute("form") RegistrationForm form, Model model, RedirectAttributes redirectAttributes) {
+        if (form.getEmail() == null || form.getEmail().isBlank() || form.getPassword() == null || form.getPassword().isBlank()) {
             model.addAttribute("error", "Email and password are required.");
             return "users/register";
         }

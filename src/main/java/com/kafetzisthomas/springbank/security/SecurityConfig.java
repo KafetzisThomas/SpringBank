@@ -58,7 +58,7 @@ public class SecurityConfig {
                 .exceptionHandling(configurer -> configurer
                         .accessDeniedPage("/showAccessDenied")
                 )
-                .httpBasic(Customizer.withDefaults());  // use HTTP Basic authentication
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }

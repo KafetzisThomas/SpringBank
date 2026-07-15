@@ -1,7 +1,8 @@
 package com.kafetzisthomas.springbank.service;
 
-import com.kafetzisthomas.springbank.dao.TransactionRepository;
 import com.kafetzisthomas.springbank.entity.Transaction;
+import com.kafetzisthomas.springbank.repository.TransactionRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -29,8 +30,8 @@ public class TransactionServiceImpl implements TransactionService{
 
     private BigDecimal getCurrentBalance(String email) {
         return transactionRepository.findTopByOwnerEmailOrderByTimestampDesc(email)
-                .map(Transaction::getBalance)
-                .orElse(BigDecimal.ZERO);
+            .map(Transaction::getBalance)
+            .orElse(BigDecimal.ZERO);
     }
 
     @Override

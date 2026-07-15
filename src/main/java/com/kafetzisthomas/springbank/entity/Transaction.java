@@ -11,8 +11,6 @@ import java.time.LocalDateTime;
 @Table(name="transactions")
 public class Transaction {
 
-    // define fields
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -40,11 +38,9 @@ public class Transaction {
     @NotNull(message="is required")
     private String ownerEmail;
 
-    // define constructors
+    // constructors
 
-    public Transaction() {
-
-    }
+    public Transaction() {}
 
     public Transaction(BigDecimal amount, BigDecimal balance, String type, LocalDateTime timestamp, String ownerEmail) {
         this.amount = amount;
@@ -54,7 +50,7 @@ public class Transaction {
         this.ownerEmail = ownerEmail;
     }
 
-    // define getters/setters
+    // getters/setters
 
     public String getOwnerEmail() {
         return ownerEmail;
@@ -103,8 +99,6 @@ public class Transaction {
     public void setId(Long id) {
         this.id = id;
     }
-
-    // define toString method
 
     @Override
     public String toString() {
