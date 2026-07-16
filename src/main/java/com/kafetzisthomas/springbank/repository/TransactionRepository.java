@@ -9,9 +9,9 @@ import java.util.Optional;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
-    List<Transaction> findAllByOwnerEmail(String ownerEmail);
+    List<Transaction> findAllByOwnerEmailOrderByTimestampAsc(String ownerEmail);
 
-    List<Transaction> findAllByOwnerEmailAndTimestampBetween(String email, LocalDateTime start, LocalDateTime end);
+    List<Transaction> findAllByOwnerEmailAndTimestampBetweenOrderByTimestampAsc(String email, LocalDateTime start, LocalDateTime end);
 
     Optional<Transaction> findTopByOwnerEmailOrderByTimestampDesc(String ownerEmail);
 

@@ -22,12 +22,12 @@ public class TransactionServiceImpl implements TransactionService{
 
     @Override
     public List<Transaction> getAllTransactions(String email) {
-        return transactionRepository.findAllByOwnerEmail(email);
+        return transactionRepository.findAllByOwnerEmailOrderByTimestampAsc(email);
     }
 
     @Override
     public List<Transaction> getTransactionsByDateRange(String email, LocalDateTime start, LocalDateTime end) {
-        return transactionRepository.findAllByOwnerEmailAndTimestampBetween(email, start, end);
+        return transactionRepository.findAllByOwnerEmailAndTimestampBetweenOrderByTimestampAsc(email, start, end);
     }
 
     @Override
