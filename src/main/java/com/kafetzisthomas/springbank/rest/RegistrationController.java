@@ -1,10 +1,7 @@
 package com.kafetzisthomas.springbank.rest;
 
 import com.kafetzisthomas.springbank.dto.RegistrationForm;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.UserDetailsManager;
+import com.kafetzisthomas.springbank.service.RegistrationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +12,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class RegistrationController {
 
-    private final UserDetailsManager userDetailsManager;
-    private final PasswordEncoder passwordEncoder;
+    private final RegistrationService registrationService;
 
-    public RegistrationController(UserDetailsManager userDetailsManager, PasswordEncoder passwordEncoder) {
-        this.userDetailsManager = userDetailsManager;
-        this.passwordEncoder = passwordEncoder;
+    public RegistrationController(RegistrationService registrationService) {
+        this.registrationService = registrationService;
     }
 
     @GetMapping("/register")
@@ -30,7 +25,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/register")
-    public String doRegister(@ModelAttribute("form") RegistrationForm form, Model model, RedirectAttributes redirectAttributes) {
+    public String doRegister(@ModelAttribute() RegistrationForm form, Model model, RedirectAttributes redirectAttributes) {
         if (form.getEmail() == null || form.getEmail().isBlank() || form.getPassword() == null || form.getPassword().isBlank()) {
             model.addAttribute("error", "Email and password are required.");
             return "users/register";
@@ -41,18 +36,12 @@ public class RegistrationController {
             return "users/register";
         }
 
-        if (userDetailsManager.userExists(form.getEmail())) {
-            model.addAttribute("error", "User already exists.");
+        try {
+            registrationService.registerUser(form);
+        } catch (Exception err) {
+            model.addAttribute("error", err.getMessage());
             return "users/register";
         }
-
-        UserDetails user = User.withUsername(form.getEmail())
-                .passwordEncoder(passwordEncoder::encode)
-                .password(form.getPassword())
-                .roles("USER")
-                .build();
-
-        userDetailsManager.createUser(user);
 
         redirectAttributes.addFlashAttribute("registered", true);
         return "redirect:/login";
