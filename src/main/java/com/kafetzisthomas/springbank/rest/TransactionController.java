@@ -73,7 +73,7 @@ public class TransactionController {
     }
 
     @PostMapping("/deposit/save")
-    public String saveDeposit(@ModelAttribute("transaction") Transaction theTransaction, @Valid BindingResult theBindingResult, Principal principal, RedirectAttributes redirectAttributes) {
+    public String saveDeposit(@Valid @ModelAttribute("transaction") Transaction theTransaction, BindingResult theBindingResult, Principal principal, RedirectAttributes redirectAttributes) {
         if (theBindingResult.hasErrors()) {
             return "transactions/deposit-form";
         }
@@ -89,7 +89,7 @@ public class TransactionController {
     }
 
     @PostMapping("/withdraw/save")
-    public String saveWithdraw(@ModelAttribute("transaction") Transaction theTransaction, @Valid BindingResult theBindingResult, Principal principal, RedirectAttributes redirectAttributes) {
+    public String saveWithdraw(@Valid @ModelAttribute("transaction") Transaction theTransaction, BindingResult theBindingResult, Principal principal, RedirectAttributes redirectAttributes) {
         if (theBindingResult.hasErrors()) {
             return "transactions/withdraw-form";
         }
