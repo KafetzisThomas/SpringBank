@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
 import java.security.Principal;
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -28,18 +27,12 @@ public class TransactionController {
     }
 
     @GetMapping("/")
-    public String listTransactions(@RequestParam(value = "daterange", required = false) String daterange, HttpServletRequest request, Model theModel, Principal principal) {
+    public String listTransactions(@RequestParam(required = false) String daterange, HttpServletRequest request, Model theModel, Principal principal) {
         List<Transaction> transactions;
         BigDecimal currentBalance = BigDecimal.ZERO;
 
-        if (daterange != null && daterange.contains(" - ")) {
-            String[] parts = daterange.split(" - ");
-            LocalDate startDate = LocalDate.parse(parts[0].trim());
-            LocalDate endDate = LocalDate.parse(parts[1].trim());
-
-            transactions = transactionService.getTransactionsByDateRange(
-                principal.getName(), startDate.atStartOfDay(), endDate.atTime(23, 59, 59)
-            );
+        if (daterange != null && !daterange.isBlank()) {
+            transactions = transactionService.getTransactionsByDateRange(principal.getName(), daterange);
 
             if (transactions.isEmpty()) {
                 theModel.addAttribute("errorMessage", "No transactions found for selected date range");

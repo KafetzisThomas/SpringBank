@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,6 +28,19 @@ public class TransactionServiceImpl implements TransactionService{
     @Override
     public List<Transaction> getTransactionsByDateRange(String email, LocalDateTime start, LocalDateTime end) {
         return transactionRepository.findAllByOwnerEmailAndTimestampBetween(email, start, end);
+    }
+
+    @Override
+    public List<Transaction> getTransactionsByDateRange(String email, String daterange) {
+        if (!daterange.contains(" - ")) {
+            return getAllTransactions(email);
+        }
+        
+        String[] parts = daterange.split(" - ");
+        LocalDate startDate = LocalDate.parse(parts[0].trim());
+        LocalDate endDate = LocalDate.parse(parts[1].trim());
+
+        return getTransactionsByDateRange(email, startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
     }
 
     private BigDecimal getCurrentBalance(String email) {
