@@ -19,11 +19,11 @@ public class TransactionRestController {
     }
 
     @GetMapping
-    public List<Transaction> getTransactions(@RequestParam(required = false) String daterange, Principal principal) {
+    public ResponseEntity<List<Transaction>> getTransactions(@RequestParam(required = false) String daterange, Principal principal) {
         if (daterange != null && !daterange.isBlank()) {
-            return transactionService.getTransactionsByDateRange(principal.getName(), daterange);
+            return ResponseEntity.ok(transactionService.getTransactionsByDateRange(principal.getName(), daterange));
         }
-        return transactionService.getAllTransactions(principal.getName());
+        return ResponseEntity.ok(transactionService.getAllTransactions(principal.getName()));
     }
 
     public record AmountRequest(java.math.BigDecimal amount) {}
@@ -36,7 +36,7 @@ public class TransactionRestController {
 
             transactionService.deposit(transaction, principal.getName());
             return ResponseEntity.ok("Deposit successful");
-        } catch (Exception err) {
+        } catch (IllegalArgumentException err) {
             return ResponseEntity.badRequest().body("Deposit failed: " + err.getMessage());
         }
     }
@@ -49,7 +49,7 @@ public class TransactionRestController {
 
             transactionService.withdraw(transaction, principal.getName());
             return ResponseEntity.ok("Withdraw successful");
-        } catch (Exception err) {
+        } catch (IllegalArgumentException err) {
             return ResponseEntity.badRequest().body("Withdraw failed: " + err.getMessage());
         }
     }
