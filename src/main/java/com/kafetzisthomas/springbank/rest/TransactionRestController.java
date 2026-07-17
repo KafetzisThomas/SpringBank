@@ -2,6 +2,9 @@ package com.kafetzisthomas.springbank.rest;
 
 import com.kafetzisthomas.springbank.entity.Transaction;
 import com.kafetzisthomas.springbank.service.TransactionService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/transactions")
+@Tag(name = "Transactions")
 public class TransactionRestController {
 
     private final TransactionService transactionService;

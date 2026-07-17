@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kafetzisthomas.springbank.dto.RegistrationForm;
 import com.kafetzisthomas.springbank.service.RegistrationService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/users")
+@Tag(name = "Users")
 public class RegistrationRestController {
 
     private final RegistrationService registrationService;
