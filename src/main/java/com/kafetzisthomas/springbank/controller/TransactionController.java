@@ -1,4 +1,4 @@
-package com.kafetzisthomas.springbank.rest;
+package com.kafetzisthomas.springbank.controller;
 
 import com.kafetzisthomas.springbank.entity.Transaction;
 import com.kafetzisthomas.springbank.service.TransactionService;

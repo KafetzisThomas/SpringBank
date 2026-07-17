@@ -1,9 +1,13 @@
-package com.kafetzisthomas.springbank.rest;
+package com.kafetzisthomas.springbank.controller;
 
 import com.kafetzisthomas.springbank.dto.RegistrationForm;
 import com.kafetzisthomas.springbank.service.RegistrationService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,9 +29,8 @@ public class RegistrationController {
     }
 
     @PostMapping("/register")
-    public String doRegister(@ModelAttribute() RegistrationForm form, Model model, RedirectAttributes redirectAttributes) {
-        if (form.getEmail() == null || form.getEmail().isBlank() || form.getPassword() == null || form.getPassword().isBlank()) {
-            model.addAttribute("error", "Email and password are required.");
+    public String doRegister(@Valid @ModelAttribute() RegistrationForm form, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) throws Exception {
+        if (bindingResult.hasErrors()) {
             return "users/register";
         }
 
@@ -38,7 +41,7 @@ public class RegistrationController {
 
         try {
             registrationService.registerUser(form);
-        } catch (Exception err) {
+        } catch (IllegalArgumentException err) {
             model.addAttribute("error", err.getMessage());
             return "users/register";
         }
