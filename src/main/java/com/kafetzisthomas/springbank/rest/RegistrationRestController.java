@@ -22,7 +22,7 @@ public class RegistrationRestController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerMobileUser(@Valid @RequestBody RegistrationForm form) throws Exception {
+    public ResponseEntity<String> registerMobileUser(@Valid @RequestBody RegistrationForm form) {
         if (!form.getPassword().equals(form.getConfirmPassword())) {
             return ResponseEntity.badRequest().body("Passwords do not match.");
         }

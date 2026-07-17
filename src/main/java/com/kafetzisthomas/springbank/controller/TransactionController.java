@@ -29,7 +29,6 @@ public class TransactionController {
     @GetMapping("/")
     public String listTransactions(@RequestParam(required = false) String daterange, HttpServletRequest request, Model theModel, Principal principal) {
         List<Transaction> transactions;
-        BigDecimal currentBalance = BigDecimal.ZERO;
 
         if (daterange != null && !daterange.isBlank()) {
             transactions = transactionService.getTransactionsByDateRange(principal.getName(), daterange);
@@ -47,12 +46,10 @@ public class TransactionController {
         theModel.addAttribute("request", request);
         theModel.addAttribute("daterange", daterange);
 
+        BigDecimal currentBalance = BigDecimal.ZERO;
         if (!transactions.isEmpty()) {
             currentBalance = transactions.getLast().getBalance();
-        } else {
-            currentBalance = BigDecimal.ZERO;
         }
-
         theModel.addAttribute("currentBalance", currentBalance);
 
         return "transactions/transaction-report";
@@ -82,7 +79,7 @@ public class TransactionController {
             transactionService.deposit(theTransaction, principal.getName());
             String formattedAmount = theTransaction.getAmount() + " €";
             redirectAttributes.addFlashAttribute("successMessage", "Deposit successful: " + formattedAmount + " added to your account");
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Deposit failed: " + e.getMessage());
         }
         return "redirect:/";
@@ -98,7 +95,7 @@ public class TransactionController {
             transactionService.withdraw(theTransaction, principal.getName());
             String formattedAmount = theTransaction.getAmount() + " €";
             redirectAttributes.addFlashAttribute("successMessage", "Withdraw successful: " + formattedAmount + " removed from your account");
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Withdraw failed: " + e.getMessage());
         }
         return "redirect:/";

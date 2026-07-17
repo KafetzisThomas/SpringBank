@@ -4,6 +4,6 @@ import com.kafetzisthomas.springbank.dto.RegistrationForm;
 
 public interface RegistrationService {
 
-    void registerUser(RegistrationForm form) throws Exception;
+    void registerUser(RegistrationForm form);
 
 }

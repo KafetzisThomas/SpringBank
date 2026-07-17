@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,7 +28,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/register")
-    public String doRegister(@Valid @ModelAttribute() RegistrationForm form, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) throws Exception {
+    public String doRegister(@Valid RegistrationForm form, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "users/register";
         }

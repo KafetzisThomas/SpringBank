@@ -21,7 +21,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Authority> authorities = new ArrayList<>();
 
-    // contructors
+    // constructors
     public User() {}
 
     public User(String email, String password, boolean enabled) {
@@ -71,8 +71,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [email=" + email + ", password=" + password + ", enabled=" + enabled + ", authorities="
-                + authorities + "]";
+        return "User [email=" + email + ", enabled=" + enabled + ", authorities=" + authorities + "]";
     }
 
 }

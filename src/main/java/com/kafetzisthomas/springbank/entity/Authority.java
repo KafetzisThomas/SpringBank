@@ -19,7 +19,7 @@ public class Authority {
     @Column(name = "authority", length = 50, nullable = false)
     private String authority;
 
-    // contructors
+    // constructors
     public Authority() {}
 
     public Authority(User user, String authority) {
