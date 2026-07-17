@@ -3,10 +3,10 @@ package com.kafetzisthomas.springbank.controller;
 import com.kafetzisthomas.springbank.entity.Transaction;
 import com.kafetzisthomas.springbank.service.TransactionService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,10 +70,7 @@ public class TransactionController {
     }
 
     @PostMapping("/deposit/save")
-    public String saveDeposit(@Valid @ModelAttribute("transaction") Transaction theTransaction, BindingResult theBindingResult, Principal principal, RedirectAttributes redirectAttributes) {
-        if (theBindingResult.hasErrors()) {
-            return "transactions/deposit-form";
-        }
+    public String saveDeposit(@ModelAttribute("transaction") Transaction theTransaction, Principal principal, RedirectAttributes redirectAttributes) {
 
         try {
             transactionService.deposit(theTransaction, principal.getName());
@@ -86,10 +83,7 @@ public class TransactionController {
     }
 
     @PostMapping("/withdraw/save")
-    public String saveWithdraw(@Valid @ModelAttribute("transaction") Transaction theTransaction, BindingResult theBindingResult, Principal principal, RedirectAttributes redirectAttributes) {
-        if (theBindingResult.hasErrors()) {
-            return "transactions/withdraw-form";
-        }
+    public String saveWithdraw(@ModelAttribute("transaction") Transaction theTransaction, Principal principal, RedirectAttributes redirectAttributes) {
 
         try {
             transactionService.withdraw(theTransaction, principal.getName());
