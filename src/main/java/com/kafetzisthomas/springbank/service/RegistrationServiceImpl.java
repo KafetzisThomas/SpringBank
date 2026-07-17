@@ -19,9 +19,9 @@ public class RegistrationServiceImpl implements RegistrationService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void registerUser(RegistrationForm form) throws Exception {
+    public void registerUser(RegistrationForm form) {
         if (userDetailsManager.userExists(form.getEmail())) {
-            throw new Exception("User already exists.");
+            throw new IllegalArgumentException("User already exists.");
         }
 
         UserDetails user = User.withUsername(form.getEmail())
