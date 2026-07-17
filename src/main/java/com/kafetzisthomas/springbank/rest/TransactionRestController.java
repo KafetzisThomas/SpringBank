@@ -26,14 +26,9 @@ public class TransactionRestController {
         return ResponseEntity.ok(transactionService.getAllTransactions(principal.getName()));
     }
 
-    public record AmountRequest(java.math.BigDecimal amount) {}
-
     @PostMapping("/deposit")
-    public ResponseEntity<String> deposit(@RequestBody AmountRequest request, Principal principal) {
+    public ResponseEntity<String> deposit(@RequestBody Transaction transaction, Principal principal) {
         try {
-            Transaction transaction = new Transaction();
-            transaction.setAmount(request.amount());
-
             transactionService.deposit(transaction, principal.getName());
             return ResponseEntity.ok("Deposit successful");
         } catch (IllegalArgumentException err) {
@@ -42,11 +37,8 @@ public class TransactionRestController {
     }
 
     @PostMapping("/withdraw")
-    public ResponseEntity<String> withdraw(@RequestBody AmountRequest request, Principal principal) {
+    public ResponseEntity<String> withdraw(@RequestBody Transaction transaction, Principal principal) {
         try {
-            Transaction transaction = new Transaction();
-            transaction.setAmount(request.amount());
-
             transactionService.withdraw(transaction, principal.getName());
             return ResponseEntity.ok("Withdraw successful");
         } catch (IllegalArgumentException err) {
