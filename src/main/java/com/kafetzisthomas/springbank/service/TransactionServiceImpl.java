@@ -32,15 +32,19 @@ public class TransactionServiceImpl implements TransactionService{
 
     @Override
     public List<Transaction> getTransactionsByDateRange(String email, String daterange) {
-        if (!daterange.contains(" - ")) {
+        if (daterange == null || !daterange.contains(" - ")) {
             return getAllTransactions(email);
         }
-        
-        String[] parts = daterange.split(" - ");
-        LocalDate startDate = LocalDate.parse(parts[0].trim());
-        LocalDate endDate = LocalDate.parse(parts[1].trim());
 
-        return getTransactionsByDateRange(email, startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
+        try {
+            String[] parts = daterange.split(" - ");
+            LocalDate startDate = LocalDate.parse(parts[0].trim());
+            LocalDate endDate = LocalDate.parse(parts[1].trim());
+
+            return getTransactionsByDateRange(email, startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
+        } catch (Exception err) {
+            return getAllTransactions(email);
+        }
     }
 
     private BigDecimal getCurrentBalance(String email) {
