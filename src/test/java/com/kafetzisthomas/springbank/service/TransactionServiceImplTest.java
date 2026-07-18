@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 
 class TransactionServiceImplTest {
 
-    private static final String EMAIL = "test@test.com";
+    private static final String EMAIL = "user@test.com";
 
     private TransactionRepository transactionRepository;
     private TransactionServiceImpl transactionService;
