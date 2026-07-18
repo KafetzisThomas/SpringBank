@@ -1,6 +1,7 @@
 <div align="center">
     <img src="src/main/resources/static/favicon.ico" width="150"/>
     <p>A simple banking system concept.<br>Written in Java/Spring Boot</p>
+    <img src="https://github.com/KafetzisThomas/SpringBank/actions/workflows/tests.yml/badge.svg"/>
 </div>
 
 ## Features
