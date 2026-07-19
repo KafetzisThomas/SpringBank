@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -48,30 +49,32 @@ class TransactionRestControllerTest {
                 .andExpect(jsonPath("$[0].type").value("Deposit"));
 
         verify(transactionService).getAllTransactions(EMAIL);
-        verify(transactionService, never()).getTransactionsByDateRange(any(), any(String.class));
+        verify(transactionService, never()).getTransactionsByDateRange(any(), any(LocalDate.class), any(LocalDate.class));
     }
 
     @Test
     void getTransactions_withDateRange_filtersResults() throws Exception {
-        String daterange = "2026-01-01 - 2026-01-31";
-        when(transactionService.getTransactionsByDateRange(EMAIL, daterange)).thenReturn(List.of());
+        LocalDate startDate = LocalDate.of(2026, 1, 1);
+        LocalDate endDate = LocalDate.of(2026, 1, 31);
+        when(transactionService.getTransactionsByDateRange(EMAIL, startDate, endDate)).thenReturn(List.of());
 
         mockMvc.perform(get("/api/transactions")
-                        .param("daterange", daterange)
+                        .param("startDate", "2026-01-01")
+                        .param("endDate", "2026-01-31")
                         .principal(PRINCIPAL))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(0));
 
-        verify(transactionService).getTransactionsByDateRange(EMAIL, daterange);
+        verify(transactionService).getTransactionsByDateRange(EMAIL, startDate, endDate);
         verify(transactionService, never()).getAllTransactions(any());
     }
 
     @Test
-    void getTransactions_blankDateRange_returnsAll() throws Exception {
+    void getTransactions_partialDateRange_returnsAll() throws Exception {
         when(transactionService.getAllTransactions(EMAIL)).thenReturn(List.of());
 
         mockMvc.perform(get("/api/transactions")
-                        .param("daterange", "   ")
+                        .param("startDate", "2026-01-01")
                         .principal(PRINCIPAL))
                 .andExpect(status().isOk());
 

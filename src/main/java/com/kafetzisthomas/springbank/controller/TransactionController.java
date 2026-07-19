@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -27,11 +29,15 @@ public class TransactionController {
     }
 
     @GetMapping("/")
-    public String listTransactions(@RequestParam(required = false) String daterange, HttpServletRequest request, Model theModel, Principal principal) {
+    public String listTransactions(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            HttpServletRequest request, Model theModel, Principal principal) {
+
         List<Transaction> transactions;
 
-        if (daterange != null && !daterange.isBlank()) {
-            transactions = transactionService.getTransactionsByDateRange(principal.getName(), daterange);
+        if (startDate != null && endDate != null) {
+            transactions = transactionService.getTransactionsByDateRange(principal.getName(), startDate, endDate);
 
             if (transactions.isEmpty()) {
                 theModel.addAttribute("errorMessage", "No transactions found for selected date range");
@@ -44,7 +50,8 @@ public class TransactionController {
 
         theModel.addAttribute("transactions", transactions);
         theModel.addAttribute("request", request);
-        theModel.addAttribute("daterange", daterange);
+        theModel.addAttribute("startDate", startDate);
+        theModel.addAttribute("endDate", endDate);
 
         BigDecimal currentBalance = BigDecimal.ZERO;
         if (!transactions.isEmpty()) {

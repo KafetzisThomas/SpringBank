@@ -7,8 +7,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -23,9 +25,13 @@ public class TransactionRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Transaction>> getTransactions(@RequestParam(required = false) String daterange, Principal principal) {
-        if (daterange != null && !daterange.isBlank()) {
-            return ResponseEntity.ok(transactionService.getTransactionsByDateRange(principal.getName(), daterange));
+    public ResponseEntity<List<Transaction>> getTransactions(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            Principal principal) {
+
+        if (startDate != null && endDate != null) {
+            return ResponseEntity.ok(transactionService.getTransactionsByDateRange(principal.getName(), startDate, endDate));
         }
         return ResponseEntity.ok(transactionService.getAllTransactions(principal.getName()));
     }

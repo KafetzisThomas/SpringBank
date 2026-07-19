@@ -16,8 +16,12 @@
         <hr class="border-dark">
 
         <form class="mb-3" method="GET">
-            <div class="input-group input-group-lg">
-                <input type="text" name="daterange" class="form-control" placeholder="YYYY-MM-DD - YYYY-MM-DD"th:value="${daterange}">
+            <div class="input-group">
+                <span class="input-group-text">From</span>
+                <input type="date" name="startDate" class="form-control" th:value="${startDate}">
+                <span class="input-group-text">To</span>
+                <input type="date" name="endDate" class="form-control" th:value="${endDate}">
+                <button type="submit" class="btn btn-primary">Filter</button>
             </div>
         </form>
 

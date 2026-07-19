@@ -56,46 +56,24 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void getTransactionsByDateRange_callsRepository() {
-        LocalDateTime start = LocalDate.of(2026, 1, 1).atStartOfDay();
-        LocalDateTime end = LocalDate.of(2026, 1, 31).atTime(23, 59, 59);
-
+    void getTransactionsByDateRange_withLocalDates_queriesRepository() {
+        LocalDate start = LocalDate.of(2026, 1, 1);
+        LocalDate end = LocalDate.of(2026, 1, 31);
         transactionService.getTransactionsByDateRange(EMAIL, start, end);
-
-        verify(transactionRepository).findAllByOwnerEmailAndTimestampBetweenOrderByTimestampAsc(EMAIL, start, end);
-    }
-
-    @Test
-    void getTransactionsByDateRange_parsesValidStrings() {
-        transactionService.getTransactionsByDateRange(EMAIL, "2026-01-01 - 2026-01-31");
 
         verify(transactionRepository).findAllByOwnerEmailAndTimestampBetweenOrderByTimestampAsc(
                 eq(EMAIL),
-                eq(LocalDate.of(2026, 1, 1).atStartOfDay()),
-                eq(LocalDate.of(2026, 1, 31).atTime(23, 59, 59))
+                eq(start.atStartOfDay()),
+                eq(end.atTime(23, 59, 59))
         );
     }
 
     @Test
-    void getTransactionsByDateRange_nullString_fallsBackToAll() {
-        transactionService.getTransactionsByDateRange(EMAIL, (String) null);
+    void getTransactionsByDateRange_nullDates_fallsBackToAll() {
+        transactionService.getTransactionsByDateRange(EMAIL, null, null);
 
         verify(transactionRepository).findAllByOwnerEmailOrderByTimestampAsc(EMAIL);
         verify(transactionRepository, never()).findAllByOwnerEmailAndTimestampBetweenOrderByTimestampAsc(any(), any(), any());
-    }
-
-    @Test
-    void getTransactionsByDateRange_noSeparator_fallsBackToAll() {
-        transactionService.getTransactionsByDateRange(EMAIL, "2026-01-01");
-
-        verify(transactionRepository).findAllByOwnerEmailOrderByTimestampAsc(EMAIL);
-    }
-
-    @Test
-    void getTransactionsByDateRange_malformedDate_fallsBackToAll() {
-        transactionService.getTransactionsByDateRange(EMAIL, "te-s-t - te-s-t");
-
-        verify(transactionRepository).findAllByOwnerEmailOrderByTimestampAsc(EMAIL);
     }
 
     @Test

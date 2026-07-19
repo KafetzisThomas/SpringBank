@@ -26,25 +26,12 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
-    public List<Transaction> getTransactionsByDateRange(String email, LocalDateTime start, LocalDateTime end) {
-        return transactionRepository.findAllByOwnerEmailAndTimestampBetweenOrderByTimestampAsc(email, start, end);
-    }
-
-    @Override
-    public List<Transaction> getTransactionsByDateRange(String email, String daterange) {
-        if (daterange == null || !daterange.contains(" - ")) {
+    public List<Transaction> getTransactionsByDateRange(String email, LocalDate startDate, LocalDate endDate) {
+        if (startDate == null || endDate == null) {
             return getAllTransactions(email);
         }
-
-        try {
-            String[] parts = daterange.split(" - ");
-            LocalDate startDate = LocalDate.parse(parts[0].trim());
-            LocalDate endDate = LocalDate.parse(parts[1].trim());
-
-            return getTransactionsByDateRange(email, startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
-        } catch (Exception err) {
-            return getAllTransactions(email);
-        }
+        return transactionRepository.findAllByOwnerEmailAndTimestampBetweenOrderByTimestampAsc(
+                email, startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
     }
 
     private BigDecimal getCurrentBalance(String email) {
