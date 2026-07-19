@@ -12,16 +12,14 @@
         <div th:if="${errorMessage}" class="alert alert-danger text-center" th:text="${errorMessage}"></div>
 
         <div class="alert alert-secondary text-center mt-3">
-            Current Balance:
-            <strong th:text="'€ ' + ${currentBalance}"></strong>
+            Current Balance: <strong th:text="${currentBalance} + ' €'"></strong>
         </div>
 
         <hr class="border-dark">
 
         <form class="mb-3" method="GET">
             <div class="input-group input-group-lg">
-                <input type="text" name="daterange" class="form-control" placeholder="YYYY-MM-DD - YYYY-MM-DD"
-                       th:value="${daterange}">
+                <input type="text" name="daterange" class="form-control" placeholder="YYYY-MM-DD - YYYY-MM-DD"th:value="${daterange}">
                 <span class="input-group-text">
                     <i class="bi bi-search"></i>
                 </span>
@@ -31,17 +29,17 @@
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
                 <tr class="text-center">
-                    <th>TRANSACTION TYPE</th>
                     <th>DATE</th>
+                    <th>TRANSACTION</th>
                     <th>AMOUNT</th>
-                    <th>BALANCE AFTER TRANSACTION</th>
+                    <th>BALANCE</th>
                 </tr>
             </thead>
 
             <tbody>
                 <tr th:each="transaction : ${transactions}">
-                    <td class="text-center" th:text="${transaction.type}" />
                     <td class="text-center" th:text="${#temporals.format(transaction.timestamp, 'MMM. d, yyyy, h:mm a')}" />
+                    <td class="text-center" th:text="${transaction.type}" />
                     <td class="text-center" th:text="'€ ' + ${transaction.amount}" />
                     <td class="text-center" th:text="'€ ' + ${transaction.balance}" />
                 </tr>
