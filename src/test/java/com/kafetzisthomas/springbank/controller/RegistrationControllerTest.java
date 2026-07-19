@@ -28,7 +28,8 @@ class RegistrationControllerTest {
 
     @Test
     void showRegistrationForm_returnsRegisterView() throws Exception {
-        mockMvc.perform(get("/register"))
+        mockMvc.perform(get("/register")
+                        .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("users/register"))
                 .andExpect(model().attributeExists("form"));

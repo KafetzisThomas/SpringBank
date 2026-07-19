@@ -38,6 +38,7 @@ class TransactionControllerTest {
         when(transactionService.getAllTransactions(EMAIL)).thenReturn(List.of());
 
         mockMvc.perform(get("/")
+                        .with(csrf())
                         .principal(PRINCIPAL))
                 .andExpect(status().isOk())
                 .andExpect(view().name("transactions/transaction-report"))
@@ -54,6 +55,7 @@ class TransactionControllerTest {
         when(transactionService.getTransactionsByDateRange(EMAIL, startDate, endDate)).thenReturn(List.of());
 
         mockMvc.perform(get("/")
+                        .with(csrf())
                         .param("startDate", "2026-01-01")
                         .param("endDate", "2026-01-31")
                         .principal(PRINCIPAL))
@@ -67,6 +69,7 @@ class TransactionControllerTest {
     @Test
     void showDepositForm_returnsDepositView() throws Exception {
         mockMvc.perform(get("/deposit")
+                        .with(csrf())
                         .principal(PRINCIPAL))
                 .andExpect(status().isOk())
                 .andExpect(view().name("transactions/deposit-form"))
