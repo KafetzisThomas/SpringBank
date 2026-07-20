@@ -46,8 +46,12 @@ Access web application at http://127.0.0.1:8080 or http://localhost:8080.
 
 ## Demo Images
 
+![Transactions](assets/transactions.png)
+
+![Date Range Calendar](assets/date_range_cal.png)
+
+![Date Range Output](assets/date_range_output.png)
+
 ![Deposit](assets/deposit.png)
 
 ![Withdraw](assets/withdraw.png)
-
-![Date Range](assets/date_range.png)
