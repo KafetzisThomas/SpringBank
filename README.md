@@ -12,7 +12,7 @@
 
 ## Tech Stack
 
-Built with Java 25, Spring Boot, MySQL, Thymeleaf and Bootstrap 5.
+Built with Java 25, Spring Boot, PostgreSQL, Thymeleaf and Bootstrap 5.
 
 ## Database Schema
 
